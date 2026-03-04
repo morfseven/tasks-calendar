@@ -1,0 +1,43 @@
+/* week.css — Weekly list view */
+
+.tc-week {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tc-gap);
+}
+
+.tc-week-day {
+  display: flex;
+  gap: 12px;
+  padding: 8px 10px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--tc-radius);
+  background: var(--background-primary);
+  min-height: 36px;
+  align-items: flex-start;
+}
+
+.tc-week-day.tc-today {
+  border-color: var(--interactive-accent);
+  border-width: 2px;
+}
+
+.tc-week-date {
+  min-width: 90px;
+  flex-shrink: 0;
+  font-weight: 600;
+  font-size: var(--font-ui-small, 13px);
+  color: var(--text-muted);
+  padding-top: 1px;
+}
+
+.tc-today .tc-week-date {
+  color: var(--interactive-accent);
+}
+
+.tc-week-tasks {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}

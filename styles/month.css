@@ -1,0 +1,110 @@
+/* month.css — Monthly grid layout */
+
+.tc-month-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--tc-gap);
+  margin-bottom: 2px;
+}
+
+.tc-weekday {
+  text-align: center;
+  font-size: var(--font-ui-smaller, 12px);
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 4px 0;
+}
+
+.tc-month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--tc-gap);
+}
+
+.tc-day {
+  min-height: var(--tc-cell-min-h);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--tc-radius);
+  padding: 4px;
+  background: var(--background-primary);
+  overflow: hidden;
+}
+
+.tc-day.tc-other-month {
+  background: var(--background-secondary);
+  opacity: 0.5;
+}
+
+.tc-day.tc-today {
+  border-color: var(--interactive-accent);
+  border-width: 2px;
+}
+
+.tc-day-num {
+  display: inline-block;
+  font-size: var(--font-ui-smaller, 12px);
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.tc-today .tc-day-num {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+/* Task list inside cell */
+.tc-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.tc-task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+  font-size: 11px;
+  line-height: 1.3;
+  padding: 1px 2px;
+  border-radius: 3px;
+}
+
+.tc-task-item:hover {
+  background: var(--background-modifier-hover);
+}
+
+.tc-task-emoji {
+  flex-shrink: 0;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.tc-task-text {
+  cursor: pointer;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.tc-task-text:hover {
+  color: var(--interactive-accent);
+  text-decoration: underline;
+}
+
+/* States */
+.tc-task-item.tc-done .tc-task-text {
+  text-decoration: line-through;
+  color: var(--text-faint);
+}
+
+.tc-task-item.tc-overdue .tc-task-text {
+  color: var(--text-error, #e5484d);
+}
+
+.tc-task-item.tc-overdue .tc-task-emoji {
+  filter: grayscale(1) brightness(0.5);
+}

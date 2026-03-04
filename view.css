@@ -1,0 +1,268 @@
+/* base.css — Common reset, variables, root styles */
+
+.tc-root {
+  --tc-radius: 6px;
+  --tc-gap: 2px;
+  --tc-cell-min-h: 90px;
+  font-family: var(--font-interface, var(--default-font, sans-serif));
+  font-size: var(--font-ui-small, 13px);
+  color: var(--text-normal);
+}
+
+.tc-root * {
+  box-sizing: border-box;
+}
+
+.tc-clickable {
+  cursor: pointer;
+}
+
+.tc-clickable:hover {
+  color: var(--interactive-accent);
+}
+
+.tc-view-container {
+  margin-top: 4px;
+}
+
+/* nav.css — Navigation bar styles */
+
+.tc-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.tc-nav-left {
+  display: flex;
+  gap: 4px;
+}
+
+.tc-nav-btn {
+  background: none;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--tc-radius);
+  padding: 4px 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: var(--font-ui-smaller, 12px);
+}
+
+.tc-nav-btn:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.tc-nav-today {
+  font-weight: 500;
+}
+
+.tc-nav-label {
+  font-weight: 600;
+  font-size: var(--font-ui-medium, 15px);
+  color: var(--text-normal);
+}
+
+.tc-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tc-nav-filter {
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--tc-radius);
+  padding: 3px 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: var(--font-ui-smaller, 12px);
+  font-family: inherit;
+}
+
+.tc-nav-filter:hover {
+  border-color: var(--interactive-accent);
+  color: var(--text-normal);
+}
+
+.tc-nav-filter:focus {
+  outline: none;
+  border-color: var(--interactive-accent);
+}
+
+.tc-nav-tab {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--tc-radius);
+  padding: 4px 10px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: var(--font-ui-smaller, 12px);
+}
+
+.tc-nav-tab:hover {
+  background: var(--background-modifier-hover);
+}
+
+.tc-nav-tab.tc-active {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-color: var(--interactive-accent);
+}
+
+/* month.css — Monthly grid layout */
+
+.tc-month-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--tc-gap);
+  margin-bottom: 2px;
+}
+
+.tc-weekday {
+  text-align: center;
+  font-size: var(--font-ui-smaller, 12px);
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 4px 0;
+}
+
+.tc-month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--tc-gap);
+}
+
+.tc-day {
+  min-height: var(--tc-cell-min-h);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--tc-radius);
+  padding: 4px;
+  background: var(--background-primary);
+  overflow: hidden;
+}
+
+.tc-day.tc-other-month {
+  background: var(--background-secondary);
+  opacity: 0.5;
+}
+
+.tc-day.tc-today {
+  border-color: var(--interactive-accent);
+  border-width: 2px;
+}
+
+.tc-day-num {
+  display: inline-block;
+  font-size: var(--font-ui-smaller, 12px);
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.tc-today .tc-day-num {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+/* Task list inside cell */
+.tc-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.tc-task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+  font-size: 11px;
+  line-height: 1.3;
+  padding: 1px 2px;
+  border-radius: 3px;
+}
+
+.tc-task-item:hover {
+  background: var(--background-modifier-hover);
+}
+
+.tc-task-emoji {
+  flex-shrink: 0;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.tc-task-text {
+  cursor: pointer;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.tc-task-text:hover {
+  color: var(--interactive-accent);
+  text-decoration: underline;
+}
+
+/* States */
+.tc-task-item.tc-done .tc-task-text {
+  text-decoration: line-through;
+  color: var(--text-faint);
+}
+
+.tc-task-item.tc-overdue .tc-task-text {
+  color: var(--text-error, #e5484d);
+}
+
+.tc-task-item.tc-overdue .tc-task-emoji {
+  filter: grayscale(1) brightness(0.5);
+}
+
+/* week.css — Weekly list view */
+
+.tc-week {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tc-gap);
+}
+
+.tc-week-day {
+  display: flex;
+  gap: 12px;
+  padding: 8px 10px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--tc-radius);
+  background: var(--background-primary);
+  min-height: 36px;
+  align-items: flex-start;
+}
+
+.tc-week-day.tc-today {
+  border-color: var(--interactive-accent);
+  border-width: 2px;
+}
+
+.tc-week-date {
+  min-width: 90px;
+  flex-shrink: 0;
+  font-weight: 600;
+  font-size: var(--font-ui-small, 13px);
+  color: var(--text-muted);
+  padding-top: 1px;
+}
+
+.tc-today .tc-week-date {
+  color: var(--interactive-accent);
+}
+
+.tc-week-tasks {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}

@@ -1,0 +1,26 @@
+/* base.css — Common reset, variables, root styles */
+
+.tc-root {
+  --tc-radius: 6px;
+  --tc-gap: 2px;
+  --tc-cell-min-h: 90px;
+  font-family: var(--font-interface, var(--default-font, sans-serif));
+  font-size: var(--font-ui-small, 13px);
+  color: var(--text-normal);
+}
+
+.tc-root * {
+  box-sizing: border-box;
+}
+
+.tc-clickable {
+  cursor: pointer;
+}
+
+.tc-clickable:hover {
+  color: var(--interactive-accent);
+}
+
+.tc-view-container {
+  margin-top: 4px;
+}

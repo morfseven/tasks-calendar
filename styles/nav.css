@@ -1,0 +1,86 @@
+/* nav.css — Navigation bar styles */
+
+.tc-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.tc-nav-left {
+  display: flex;
+  gap: 4px;
+}
+
+.tc-nav-btn {
+  background: none;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--tc-radius);
+  padding: 4px 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: var(--font-ui-smaller, 12px);
+}
+
+.tc-nav-btn:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.tc-nav-today {
+  font-weight: 500;
+}
+
+.tc-nav-label {
+  font-weight: 600;
+  font-size: var(--font-ui-medium, 15px);
+  color: var(--text-normal);
+}
+
+.tc-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tc-nav-filter {
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--tc-radius);
+  padding: 3px 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: var(--font-ui-smaller, 12px);
+  font-family: inherit;
+}
+
+.tc-nav-filter:hover {
+  border-color: var(--interactive-accent);
+  color: var(--text-normal);
+}
+
+.tc-nav-filter:focus {
+  outline: none;
+  border-color: var(--interactive-accent);
+}
+
+.tc-nav-tab {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--tc-radius);
+  padding: 4px 10px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: var(--font-ui-smaller, 12px);
+}
+
+.tc-nav-tab:hover {
+  background: var(--background-modifier-hover);
+}
+
+.tc-nav-tab.tc-active {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-color: var(--interactive-accent);
+}
