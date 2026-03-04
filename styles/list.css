@@ -1,0 +1,57 @@
+/* list.css — Monthly list view */
+
+.tc-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tc-gap);
+}
+
+.tc-list-day {
+  display: flex;
+  gap: 12px;
+  padding: 8px 10px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--tc-radius);
+  background: var(--background-primary);
+  min-height: 36px;
+  align-items: flex-start;
+}
+
+.tc-list-day.tc-today {
+  border-color: var(--interactive-accent);
+  border-width: 2px;
+}
+
+.tc-list-date {
+  min-width: 90px;
+  flex-shrink: 0;
+  font-weight: 600;
+  font-size: var(--font-ui-small, 13px);
+  color: var(--text-muted);
+  padding-top: 1px;
+}
+
+.tc-today .tc-list-date {
+  color: var(--interactive-accent);
+}
+
+.tc-list-tasks {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tc-list-source {
+  margin-left: auto;
+  font-size: var(--font-ui-smaller, 12px);
+  color: var(--text-faint);
+  flex-shrink: 0;
+}
+
+.tc-list-empty {
+  text-align: center;
+  color: var(--text-faint);
+  font-size: var(--font-ui-small, 13px);
+  padding: 24px;
+}
