@@ -4,6 +4,10 @@ A minimal, dependency-free calendar view for [Obsidian](https://obsidian.md/) th
 
 ![Month View](https://img.shields.io/badge/view-month-blue) ![Week View](https://img.shields.io/badge/view-week-green) ![License](https://img.shields.io/badge/license-MIT-yellow)
 
+| Month View | Week View |
+|:---:|:---:|
+| ![Month View](screenshots/month-view.png) | ![Week View](screenshots/week-view.png) |
+
 ## Features
 
 - **Month view** — 7-week grid with task text displayed directly in cells
