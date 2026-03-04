@@ -3,6 +3,7 @@
 var TC_VIEWS = {
   month: tcMonthView,
   week: tcWeekView,
+  list: tcListView,
 };
 
 function tcGetWeekStart(date, firstDay) {
@@ -51,7 +52,7 @@ function tcInit(dv, input) {
         state.weekStart = tcFormatDate(ws);
         state.year = ws.getFullYear();
         state.month = ws.getMonth();
-      } else {
+      } else { // month and list share monthly navigation
         state.month += dir;
         if (state.month > 11) { state.month = 0; state.year++; }
         if (state.month < 0) { state.month = 11; state.year--; }
