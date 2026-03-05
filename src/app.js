@@ -4,6 +4,7 @@ var TC_VIEWS = {
   month: tcMonthView,
   week: tcWeekView,
   list: tcListView,
+  overdue: tcOverdueView,
 };
 
 function tcGetWeekStart(date, firstDay) {

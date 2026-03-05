@@ -56,18 +56,26 @@ function tcCreateNav(state, views, onNavigate, onViewChange, onFilterChange) {
   nav.appendChild(right);
 
   function update() {
-    // Label: week range for week view, month/year for month view
-    if (state.view === 'week' && state.weekStart) {
-      var ws = new Date(state.weekStart + 'T00:00:00');
-      var we = new Date(ws);
-      we.setDate(we.getDate() + 6);
-      var startStr = MONTHS[ws.getMonth()] + ' ' + ws.getDate();
-      var endStr = ws.getMonth() === we.getMonth()
-        ? String(we.getDate())
-        : MONTHS[we.getMonth()] + ' ' + we.getDate();
-      label.textContent = startStr + ' \u2013 ' + endStr + ', ' + we.getFullYear();
+    // Label depends on view type
+    if (state.view === 'overdue') {
+      label.textContent = 'Overdue Tasks';
+      left.style.visibility = 'hidden';
+      filterSelect.style.display = 'none';
     } else {
-      label.textContent = MONTHS[state.month] + ' ' + state.year;
+      left.style.visibility = '';
+      filterSelect.style.display = '';
+      if (state.view === 'week' && state.weekStart) {
+        var ws = new Date(state.weekStart + 'T00:00:00');
+        var we = new Date(ws);
+        we.setDate(we.getDate() + 6);
+        var startStr = MONTHS[ws.getMonth()] + ' ' + ws.getDate();
+        var endStr = ws.getMonth() === we.getMonth()
+          ? String(we.getDate())
+          : MONTHS[we.getMonth()] + ' ' + we.getDate();
+        label.textContent = startStr + ' \u2013 ' + endStr + ', ' + we.getFullYear();
+      } else {
+        label.textContent = MONTHS[state.month] + ' ' + state.year;
+      }
     }
 
     // Tab active states
