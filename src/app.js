@@ -26,7 +26,7 @@ function tcInit(dv, input) {
       year: now.getFullYear(),
       month: now.getMonth(),
       view: cfg.view,
-      filter: 'active',
+      filter: cfg.filter,
       weekStart: tcGetWeekStart(now, cfg.firstDayOfWeek),
     };
 

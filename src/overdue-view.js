@@ -49,6 +49,11 @@ function tcOverdueView(state, store, cfg) {
     for (var task of tasks) {
       var item = tcEl('div', { class: 'tc-task-item tc-overdue' });
 
+      var checkbox = tcEl('input', { type: 'checkbox', class: 'tc-task-checkbox' });
+      checkbox.checked = task.completed;
+      tcOn(checkbox, 'click', tcMakeToggleHandler(task));
+      item.appendChild(checkbox);
+
       item.appendChild(tcEl('span', { class: 'tc-task-emoji', text: '\uD83D\uDCC5' }));
 
       var text = tcEl('span', { class: 'tc-task-text', text: task.text });

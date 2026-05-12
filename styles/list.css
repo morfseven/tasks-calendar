@@ -43,9 +43,12 @@
 }
 
 .tc-list-source {
-  margin-left: auto;
-  font-size: var(--font-ui-smaller, 12px);
-  color: var(--text-faint);
+  display: none;
+}
+
+.tc-task-checkbox {
+  margin: 0 4px 0 0;
+  cursor: pointer;
   flex-shrink: 0;
 }
 

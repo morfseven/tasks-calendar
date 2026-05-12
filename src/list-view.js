@@ -50,11 +50,17 @@ function tcListView(state, store, cfg) {
 
         var item = tcEl('div', { class: itemClasses.join(' ') });
 
-        var emoji = task.completed ? '\u2705'
-          : task.type === 'due' ? '\uD83D\uDCC5'
+        var checkbox = tcEl('input', { type: 'checkbox', class: 'tc-task-checkbox' });
+        checkbox.checked = task.completed;
+        tcOn(checkbox, 'click', tcMakeToggleHandler(task));
+        item.appendChild(checkbox);
+
+        var typeEmoji = task.type === 'due' ? '\uD83D\uDCC5'
           : task.type === 'scheduled' ? '\u23F3'
-          : '\u00B7';
-        item.appendChild(tcEl('span', { class: 'tc-task-emoji', text: emoji }));
+          : '';
+        if (typeEmoji) {
+          item.appendChild(tcEl('span', { class: 'tc-task-emoji', text: typeEmoji }));
+        }
 
         var text = tcEl('span', { class: 'tc-task-text', text: task.text });
         tcOn(text, 'click', tcMakeOpenNoteHandler(task.path));

@@ -6,6 +6,7 @@ const TC_DEFAULTS = {
   dailyNoteFormat: 'YYYY-MM-DD',
   firstDayOfWeek: 0, // 0=Sun, 1=Mon
   view: 'month',
+  filter: 'all', // 'active' | 'all' | 'overdue' | 'done'
 };
 
 function tcParseConfig(input) {
@@ -17,6 +18,7 @@ function tcParseConfig(input) {
     if (input.dailyNoteFormat != null) cfg.dailyNoteFormat = String(input.dailyNoteFormat);
     if (input.firstDayOfWeek != null) cfg.firstDayOfWeek = Number(input.firstDayOfWeek) === 1 ? 1 : 0;
     if (input.view != null) cfg.view = String(input.view);
+    if (input.filter != null) cfg.filter = String(input.filter);
   }
 
   return cfg;

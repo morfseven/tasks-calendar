@@ -4,6 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
   padding: 6px 4px;
   border-bottom: 1px solid var(--background-modifier-border);
 }
@@ -11,6 +13,13 @@
 .tc-nav-left {
   display: flex;
   gap: 4px;
+  flex-shrink: 0;
+}
+
+.tc-nav-btn,
+.tc-nav-tab,
+.tc-nav-filter {
+  white-space: nowrap;
 }
 
 .tc-nav-btn {
@@ -36,12 +45,16 @@
   font-weight: 600;
   font-size: var(--font-ui-medium, 15px);
   color: var(--text-normal);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .tc-nav-right {
   display: flex;
   align-items: center;
   gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .tc-nav-filter {

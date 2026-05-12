@@ -45,11 +45,17 @@ function tcWeekView(state, store, cfg) {
 
       var item = tcEl('div', { class: itemClasses.join(' ') });
 
-      var emoji = task.completed ? '✅'
-        : task.type === 'due' ? '📅'
+      var checkbox = tcEl('input', { type: 'checkbox', class: 'tc-task-checkbox' });
+      checkbox.checked = task.completed;
+      tcOn(checkbox, 'click', tcMakeToggleHandler(task));
+      item.appendChild(checkbox);
+
+      var typeEmoji = task.type === 'due' ? '📅'
         : task.type === 'scheduled' ? '⏳'
-        : '·';
-      item.appendChild(tcEl('span', { class: 'tc-task-emoji', text: emoji }));
+        : '';
+      if (typeEmoji) {
+        item.appendChild(tcEl('span', { class: 'tc-task-emoji', text: typeEmoji }));
+      }
 
       var text = tcEl('span', { class: 'tc-task-text', text: task.text });
       tcOn(text, 'click', tcMakeOpenNoteHandler(task.path));

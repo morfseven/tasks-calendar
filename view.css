@@ -31,6 +31,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
   padding: 6px 4px;
   border-bottom: 1px solid var(--background-modifier-border);
 }
@@ -38,6 +40,13 @@
 .tc-nav-left {
   display: flex;
   gap: 4px;
+  flex-shrink: 0;
+}
+
+.tc-nav-btn,
+.tc-nav-tab,
+.tc-nav-filter {
+  white-space: nowrap;
 }
 
 .tc-nav-btn {
@@ -63,12 +72,16 @@
   font-weight: 600;
   font-size: var(--font-ui-medium, 15px);
   color: var(--text-normal);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .tc-nav-right {
   display: flex;
   align-items: center;
   gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .tc-nav-filter {
@@ -398,9 +411,12 @@
 }
 
 .tc-list-source {
-  margin-left: auto;
-  font-size: var(--font-ui-smaller, 12px);
-  color: var(--text-faint);
+  display: none;
+}
+
+.tc-task-checkbox {
+  margin: 0 4px 0 0;
+  cursor: pointer;
   flex-shrink: 0;
 }
 
