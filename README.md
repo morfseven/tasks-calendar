@@ -13,7 +13,7 @@ A minimal, dependency-free calendar view for [Obsidian](https://obsidian.md/) th
 - **Month view** — 7-week grid with task text displayed directly in cells
 - **Week view** — Day-by-day list with full task details
 - **Task type indicators** — 📅 due, ⏳ scheduled, ✅ completed
-- **Filter dropdown** — Active (default), All, Overdue, Done
+- **Filter dropdown** — All (default), Active, Overdue, Done
 - **Daily note linking** — Click any date to open its daily note
 - **Task note linking** — Click any task to jump to its source note
 - **Theme compatible** — Uses Obsidian CSS variables for dark/light mode
@@ -22,7 +22,7 @@ A minimal, dependency-free calendar view for [Obsidian](https://obsidian.md/) th
 ## Requirements
 
 - [Obsidian](https://obsidian.md/)
-- [Dataview](https://github.com/blacksmithgu/obsidian-dataview) plugin (with DataviewJS enabled)
+- [Dataview](https://github.com/blacksmithgu/obsidian-dataview) plugin — **Settings > Dataview > Enable JavaScript Queries** must be **ON** (off by default)
 - [Tasks](https://github.com/obsidian-tasks-group/obsidian-tasks) plugin (optional, for emoji-based task dates)
 
 ## Installation
@@ -62,10 +62,11 @@ await dv.view("tasks-calendar", {
 | Parameter | Default | Description |
 |-----------|---------|-------------|
 | `pages` | `""` | Dataview source query to filter pages |
-| `view` | `"month"` | Initial view: `"month"` or `"week"` |
+| `view` | `"month"` | Initial view: `"month"`, `"week"`, `"list"`, or `"overdue"` |
+| `filter` | `"all"` | Initial filter: `"all"`, `"active"` (incomplete only), `"overdue"`, or `"done"` |
 | `firstDayOfWeek` | `0` | `0` = Sunday, `1` = Monday |
 | `dailyNoteFolder` | `""` | Path to daily notes folder (enables date click) |
-| `dailyNoteFormat` | `"YYYY-MM-DD"` | Daily note filename format |
+| `dailyNoteFormat` | `"YYYY-MM-DD"` | Daily note filename ([moment.js tokens](https://momentjs.com/docs/#/displaying/format/)) |
 
 ### Examples
 
@@ -83,6 +84,14 @@ Start week on Monday with daily notes in a nested structure:
 await dv.view("tasks-calendar", {
   firstDayOfWeek: 1,
   dailyNoteFolder: "journal/daily",
+})
+```
+
+Open with only incomplete tasks visible:
+
+```dataviewjs
+await dv.view("tasks-calendar", {
+  filter: "active",
 })
 ```
 
@@ -108,19 +117,22 @@ Source files are organized in `src/` and `styles/`, then concatenated into `view
 
 ```
 src/
-├── config.js       # Parameter parsing
-├── store.js        # Task collection and indexing
-├── dom.js          # DOM helpers
-├── nav.js          # Navigation bar
-├── month-view.js   # Monthly grid
-├── week-view.js    # Weekly list
-└── app.js          # Entry point
+├── config.js        # Parameter parsing
+├── store.js         # Task collection and indexing
+├── dom.js           # DOM helpers
+├── nav.js           # Navigation bar
+├── month-view.js    # Monthly grid
+├── week-view.js     # Weekly list
+├── list-view.js     # List view
+├── overdue-view.js  # Overdue-only view
+└── app.js           # Entry point, view registry
 
 styles/
-├── base.css        # Variables and reset
-├── nav.css         # Navigation bar
-├── month.css       # Month grid
-└── week.css        # Week list
+├── base.css         # Variables and reset
+├── nav.css          # Navigation bar
+├── month.css        # Month grid
+├── week.css         # Week list
+└── list.css         # List/overdue views
 ```
 
 To rebuild after editing source files:
@@ -130,6 +142,13 @@ bash build.sh
 ```
 
 Then copy the updated `view.js` and `view.css` to your vault.
+
+## Troubleshooting
+
+- **Calendar shows nothing / "view.js not found"** — The first argument to `dv.view()` must match the folder path containing `view.js`, relative to vault root. The filenames inside that folder must be exactly `view.js` and `view.css` (Dataview's convention).
+- **Block renders as plain text** — Dataview's JavaScript queries are disabled by default. Open **Settings > Dataview > Enable JavaScript Queries** and toggle it ON.
+- **Tasks have dates but don't appear on the grid** — Check that dates are either Dataview inline fields (`due::`, `scheduled::`, etc.) or Tasks-plugin emojis (`📅 2026-05-13`). Free-form text dates won't be parsed.
+- **Style changes don't apply** — Obsidian caches CSS aggressively. After editing `view.css`, reload the vault (Cmd/Ctrl+R) or toggle the Dataview plugin off/on.
 
 ## License
 
