@@ -410,10 +410,6 @@
   gap: 2px;
 }
 
-.tc-list-source {
-  display: none;
-}
-
 .tc-task-checkbox {
   margin: 0 4px 0 0;
   cursor: pointer;

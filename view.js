@@ -652,9 +652,6 @@ function tcListView(state, store, cfg) {
         tcOn(text, 'click', tcMakeOpenNoteHandler(task.path));
         item.appendChild(text);
 
-        var source = task.path.split('/').pop().replace(/\.md$/, '');
-        item.appendChild(tcEl('span', { class: 'tc-list-source', text: source }));
-
         taskContainer.appendChild(item);
       }
 
@@ -734,9 +731,6 @@ function tcOverdueView(state, store, cfg) {
       var text = tcEl('span', { class: 'tc-task-text', text: task.text });
       tcOn(text, 'click', tcMakeOpenNoteHandler(task.path));
       item.appendChild(text);
-
-      var source = task.path.split('/').pop().replace(/\.md$/, '');
-      item.appendChild(tcEl('span', { class: 'tc-list-source', text: source }));
 
       taskContainer.appendChild(item);
     }
