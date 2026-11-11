@@ -182,6 +182,42 @@ function tcOn(el, event, fn) {
   return el;
 }
 
+// Split task text into plain strings and [[target|alias]] wikilinks
+function tcParseWikilinks(text) {
+  var parts = [];
+  var re = /\[\[([^\[\]|]+)(?:\|([^\[\]]+))?\]\]/g;
+  var last = 0;
+  var m;
+  while ((m = re.exec(text))) {
+    if (m.index > last) parts.push(text.slice(last, m.index));
+    parts.push({ target: m[1].trim(), label: (m[2] || m[1]).trim() });
+    last = re.lastIndex;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
+
+// Task text span; wikilinks render as Obsidian internal links (alias shown)
+function tcTaskTextEl(task) {
+  var span = tcEl('span', { class: 'tc-task-text' });
+  for (var part of tcParseWikilinks(task.text)) {
+    if (typeof part === 'string') {
+      span.appendChild(document.createTextNode(part));
+      continue;
+    }
+    var link = tcEl('a', { class: 'internal-link', 'data-href': part.target, text: part.label });
+    tcOn(link, 'click', (function(target) {
+      return function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (app && app.workspace) app.workspace.openLinkText(target, task.path);
+      };
+    })(part.target));
+    span.appendChild(link);
+  }
+  return span;
+}
+
 // nav.js — Navigation bar with month selector, filters, and view tabs
 
 function tcCreateNav(state, views, onNavigate, onViewChange, onFilterChange) {
@@ -369,7 +405,7 @@ function tcMonthView(state, store, cfg) {
           item.appendChild(tcEl('span', { class: 'tc-task-emoji', text: typeEmoji }));
         }
 
-        const text = tcEl('span', { class: 'tc-task-text', text: task.text });
+        const text = tcTaskTextEl(task);
         tcOn(text, 'click', tcMakeOpenNoteHandler(task.path));
         item.appendChild(text);
 
@@ -442,7 +478,7 @@ function tcShowDetailPanel(panel, dateStr, store, state, cfg, todayStr, MONTHS, 
       item.appendChild(tcEl('span', { class: 'tc-task-emoji', text: typeEmoji }));
     }
 
-    var text = tcEl('span', { class: 'tc-task-text', text: task.text });
+    var text = tcTaskTextEl(task);
     tcOn(text, 'click', tcMakeOpenNoteHandler(task.path));
     item.appendChild(text);
 
@@ -569,7 +605,7 @@ function tcWeekView(state, store, cfg) {
         item.appendChild(tcEl('span', { class: 'tc-task-emoji', text: typeEmoji }));
       }
 
-      var text = tcEl('span', { class: 'tc-task-text', text: task.text });
+      var text = tcTaskTextEl(task);
       tcOn(text, 'click', tcMakeOpenNoteHandler(task.path));
       item.appendChild(text);
 
@@ -648,7 +684,7 @@ function tcListView(state, store, cfg) {
           item.appendChild(tcEl('span', { class: 'tc-task-emoji', text: typeEmoji }));
         }
 
-        var text = tcEl('span', { class: 'tc-task-text', text: task.text });
+        var text = tcTaskTextEl(task);
         tcOn(text, 'click', tcMakeOpenNoteHandler(task.path));
         item.appendChild(text);
 
@@ -731,7 +767,7 @@ function tcOverdueView(state, store, cfg) {
 
       item.appendChild(tcEl('span', { class: 'tc-task-emoji', text: '\uD83D\uDCC5' }));
 
-      var text = tcEl('span', { class: 'tc-task-text', text: task.text });
+      var text = tcTaskTextEl(task);
       tcOn(text, 'click', tcMakeOpenNoteHandler(task.path));
       item.appendChild(text);
 

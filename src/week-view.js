@@ -57,7 +57,7 @@ function tcWeekView(state, store, cfg) {
         item.appendChild(tcEl('span', { class: 'tc-task-emoji', text: typeEmoji }));
       }
 
-      var text = tcEl('span', { class: 'tc-task-text', text: task.text });
+      var text = tcTaskTextEl(task);
       tcOn(text, 'click', tcMakeOpenNoteHandler(task.path));
       item.appendChild(text);
 
